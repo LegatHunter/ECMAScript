@@ -21,19 +21,21 @@ manager.displayInfo();
 // Department: Sales*/
 
 class Employee {
-  constructor(name){
-    this.name = name
+  constructor(name) {
+    this.name = name;
   }
-  displayInfo() {console.log(`Name: ${this.name}`)}
+  displayInfo() {
+    console.log(`Name: ${this.name}`);
+  }
 }
 
-class Manager extends Employee{
-  constructor(name, department){
-    super(name)
-    this.department = department
+class Manager extends Employee {
+  constructor(name, department) {
+    super(name);
+    this.department = department;
   }
-  displayInfo (){
-    super.displayInfo()
+  displayInfo() {
+    super.displayInfo();
     console.log(`Department: ${this.department}.`);
   }
 }
@@ -69,3 +71,33 @@ order.addProduct(product2);
 
 console.log(order.getTotalPrice()); // Вывод: 600*/
 
+class Product {
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+}
+class Order extends Product{
+  constructor(orderNumber) {
+    super();
+    this.product = []
+    this.orderNumber = orderNumber;
+  }
+  addProduct(product) {
+    this.product.push(product)
+  }
+  getTotalPrice () {
+    const total = this.product.reduce((acc, element) => {
+      return acc + element.price
+    }, 0)
+    return total;
+  }
+}
+
+const order = new Order(1);
+const iPhone = new Product("Phone", 115000);
+order.addProduct(iPhone);
+const headphones = new Product("Headphones", 12000);
+order.addProduct(headphones);
+console.log(order.product);
+console.log(order.getTotalPrice());
